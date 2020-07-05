@@ -8,7 +8,7 @@ var def = function(v){
 return typeof v
 !== 'undefined'; }
 
-var mod = function(opt){
+var mod = function(){
     var app = this;
     app.srv = null;
     
