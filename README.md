@@ -1,5 +1,5 @@
 # NRoute
-Non-bloated Nodejs http server and request handler
+Non-bloated Nodejs http server and request handler that uses Express-inspired middlewares.
 
 ### Install
 ```
