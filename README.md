@@ -1,14 +1,14 @@
-# KCServer
+# NRoute
 Non-bloated Nodejs http server and request handler
 
 ### Install
 ```
-npm install kc-server
+npm install nroute
 ```
 
 ### Use
 ```js
-var app = require('kc-server');
+var app = require('nroute');
 
 app.use(function(req, res, next){
    console.log('test');
