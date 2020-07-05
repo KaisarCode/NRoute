@@ -10,15 +10,21 @@ return typeof v
 
 var mod = function(opt){
     var app = this;
+    app.srv = null;
     
     // Init server
     app.serve = function(prot){
        prot = prot || 'http';
        prot == 'https' ?
-       srv = startHttps() :
-       srv = startHttp();
-       return srv;
+       app.srv = startHttps() :
+       app.srv = startHttp();
+       return app.srv;
     };
+    
+    // Listen to port
+    app.listen = function(port) {
+        return app.srv.listen(port);
+    }
     
     // Define middleware
     var mdi = 0;
