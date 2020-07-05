@@ -1,0 +1,23 @@
+{
+  "name": "nroute",
+  "version": "1.0.4",
+  "description": "Non-bloated Nodejs http server and request handler.",
+  "main": "kc-server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaisarCode/NRoute.git"
+  },
+  "keywords": [
+    "server",
+    "middleware",
+    "simple",
+    "non bloated",
+    "express like"
+  ],
+  "author": "KaisarCode",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaisarCode/NRoute/issues"
+  },
+  "homepage": "https://github.com/KaisarCode/NRoute"
+}
