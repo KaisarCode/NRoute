@@ -4,8 +4,6 @@
  * that uses Express-inspired middlewares
  */
 var fs = require('fs');
-var url = require('url');
-var qst = require('kc-qstr');
 var def = function(v){
 return typeof v
 !== 'undefined'; }

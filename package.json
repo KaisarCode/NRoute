@@ -19,8 +19,5 @@
   "bugs": {
     "url": "https://github.com/KaisarCode/NRoute/issues"
   },
-  "homepage": "https://github.com/KaisarCode/NRoute",
-  "dependencies": {
-    "kc-qstr": "^1.0.2"
-  }
+  "homepage": "https://github.com/KaisarCode/NRoute"
 }
