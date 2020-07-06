@@ -4,6 +4,7 @@
  * that uses Express-inspired middlewares
  */
 var fs = require('fs');
+var url = require('url');
 var def = function(v){
 return typeof v
 !== 'undefined'; }
@@ -48,10 +49,22 @@ var mod = function(){
     // Global request handler
     function handleReq(req, res) {
         mdi = 0;
-        var loaded = false;
+        
+        // Parse URL
+        var urlp = url.parse(req.url);
+        for(var k in urlp) {
+        req[k] = urlp[k]; }
+        
+        // Raw body
         req.body = '';
         req.on('data', function(c){
         c = c+''; req.body += c; });
+        
+        // JSON body
+        req.json = null;
+        try { req.json = JSON.parse(c); 
+        } catch(err){}
+        
         req.on('end', function(c){
             callMdw(req, res);
         });
