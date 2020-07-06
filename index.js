@@ -51,25 +51,12 @@ var mod = function(){
     function handleReq(req, res) {
         mdi = 0;
         
-        // Parse Req
-        var urlp = url.parse(req.url);
-        urlp.path = urlp.pathname;
-        delete urlp.pathname;
-        urlp.query = qst(urlp.query);
-        urlp.cookie = qst(req.headers.cookie, ';');
-        for(var k in urlp) {
-        req[k] = urlp[k]; }
-        
         // Raw body
         req.body = '';
         req.on('data', function(c){
         c = c+''; req.body += c; });
         
-        // JSON body
-        req.json = null;
-        try { req.json = JSON.parse(c); 
-        } catch(err){}
-        
+        // Call middlewares
         req.on('end', function(c){
             callMdw(req, res);
         });
