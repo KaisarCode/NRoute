@@ -5,6 +5,7 @@
  */
 var fs = require('fs');
 var url = require('url');
+var qst = require('kc-qstr');
 var def = function(v){
 return typeof v
 !== 'undefined'; }
@@ -50,8 +51,12 @@ var mod = function(){
     function handleReq(req, res) {
         mdi = 0;
         
-        // Parse URL
+        // Parse Req
         var urlp = url.parse(req.url);
+        urlp.path = urlp.pathname;
+        delete urlp.pathname;
+        urlp.query = qst(urlp.query);
+        urlp.cookie = qst(req.headers.cookie, ';');
         for(var k in urlp) {
         req[k] = urlp[k]; }
         
