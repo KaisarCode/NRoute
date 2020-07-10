@@ -4,9 +4,16 @@
  * that uses Express-inspired middlewares
  */
 var fs = require('fs');
-var def = function(v){
-return typeof v
-!== 'undefined'; }
+
+function def(v){
+    return typeof v !== 'undefined';
+}
+function isstr(v) {
+    return typeof v == 'string';
+}
+function isrx(v) {
+    return v instanceof RegExp;
+}
 
 var mod = function(){
     var app = this;
@@ -27,11 +34,30 @@ var mod = function(){
     }
     
     // Define middleware
-    var mdi = 0;
-    var mdw = [];
-    app.use = function(cb) {
-        mdw.push(cb);
+    var mdi = 0; var mdw = [];
+    function defMdw(mth, pth, cb) {
+        cb = cb || function(){};
+        if (typeof pth == 'function') {
+            cb = pth;
+            pth = '*';
+        } mdw.push({ mth: mth, pth: pth, fnc: cb });
     }
+    
+    // Middlewares by method
+    app.use = function(pth, cb) {
+    defMdw('*', pth, cb); }
+    app.get = function(pth, cb) {
+    defMdw('get', pth, cb); }
+    app.post = function(pth, cb) {
+    defMdw('post', pth, cb); }
+    app.put = function(pth, cb) {
+    defMdw('put', pth, cb); }
+    app.delete = function(pth, cb) {
+    defMdw('delete', pth, cb); }
+    app.patch = function(pth, cb) {
+    defMdw('patch', pth, cb); }
+    app.options = function(pth, cb) {
+    defMdw('options', pth, cb); }
     
     // Call middleware stack
     function callMdw(req, res) {
@@ -40,8 +66,42 @@ var mod = function(){
             callMdw(req, res);
         }
         if (def(mdw[mdi])) {
-            var md = mdw[mdi];
-            md(req, res, next);
+            var pt = mdw[mdi].pth;
+            var m1 = mdw[mdi].mth;
+            var m2 = req.method.toLowerCase();
+            if (m1 == m2 || m1 == '*') {
+                var pass = false;
+                
+                // Match all paths
+                if (pt == '*') pass = true;
+                
+                // Match literal path
+                if (isstr(pt) &&
+                pt == req.url) {
+                pass = true; }
+                
+                // Match path RegExp
+                // Save rx groups in req.pmatch
+                req.pmatch = req.pmatch || [];
+                if (isrx(pt)) {
+                    var x = pt.exec(req.url);
+                    if (x) {
+                    x.shift();
+                    delete x.index;
+                    delete x.input;
+                    delete x.groups;
+                    for (var i = 0;
+                    i < x.length; i++) {
+                    req.pmatch.push(x[i]); }
+                    pass = true; }
+                }
+                
+                // Exec middleware
+                if (pass) {
+                    var md = mdw[mdi].fnc
+                    md(req, res, next);
+                } else { next(); }
+            }
         }
     }
     
