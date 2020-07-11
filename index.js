@@ -69,6 +69,7 @@ var mod = function(){
             var pt = mdw[mdi].pth;
             var m1 = mdw[mdi].mth;
             var m2 = req.method.toLowerCase();
+            var ur = req.url.split('?')[0];
             if (m1 == m2 || m1 == '*') {
                 var pass = false;
                 
@@ -77,14 +78,13 @@ var mod = function(){
                 
                 // Match literal path
                 if (isstr(pt) &&
-                pt == req.url) {
-                pass = true; }
+                pt == ur) { pass = true; }
                 
                 // Match path RegExp
                 // Save rx groups in req.pmatch
                 req.pmatch = req.pmatch || [];
                 if (isrx(pt)) {
-                    var x = pt.exec(req.url);
+                    var x = pt.exec(ur);
                     if (x) {
                     x.shift();
                     delete x.index;
