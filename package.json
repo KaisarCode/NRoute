@@ -1,40 +1,12 @@
 {
-  "_args": [
-    [
-      "nroute@1.0.9",
-      "/home/kaisar/Work/POW/backoffice"
-    ]
-  ],
-  "_from": "nroute@1.0.9",
-  "_id": "nroute@1.0.9",
-  "_inBundle": false,
-  "_integrity": "sha512-DK58Ek08iaptxcUP42QDT3kQcYOTECnoTfIvRUM4p007/2w9p8i/x4zuf7FkHcDm1CVtYgsxfAUcLp06wVCiQg==",
-  "_location": "/nroute",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "version",
-    "registry": true,
-    "raw": "nroute@1.0.9",
-    "name": "nroute",
-    "escapedName": "nroute",
-    "rawSpec": "1.0.9",
-    "saveSpec": null,
-    "fetchSpec": "1.0.9"
+  "name": "nroute",
+  "version": "1.0.12",
+  "description": "Non-bloated Nodejs http server and request handler",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaisarCode/JSUtils.git"
   },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/nroute/-/nroute-1.0.9.tgz",
-  "_spec": "1.0.9",
-  "_where": "/home/kaisar/Work/POW/backoffice",
-  "author": {
-    "name": "KaisarCode"
-  },
-  "bugs": {
-    "url": "https://github.com/KaisarCode/NRoute/issues"
-  },
-  "description": "Non-bloated Nodejs http server and request handler.",
-  "homepage": "https://github.com/KaisarCode/NRoute",
   "keywords": [
     "server",
     "middleware",
@@ -42,12 +14,10 @@
     "non bloated",
     "express like"
   ],
+  "author": "KaisarCode",
   "license": "ISC",
-  "main": "kc-server.js",
-  "name": "nroute",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KaisarCode/NRoute.git"
+  "bugs": {
+    "url": "https://github.com/KaisarCode/NRoute/issues"
   },
-  "version": "1.0.11"
+  "homepage": "https://github.com/KaisarCode/NRoute"
 }
