@@ -7,6 +7,8 @@ var fs = require('fs');
 var def = function(v){
 return typeof v
 !== 'undefined'; }
+var url = require('url');
+var qry = require('kc-qstr');
 
 var mod = function(){
     var app = this;
@@ -49,10 +51,51 @@ var mod = function(){
     function handleReq(req, res) {
         mdi = 0;
         
+        // Parse url
+        var urlp =
+        url.parse(req.url);
+        req.query = qry(urlp.query);
+        req.protocol = urlp.protocol || 'http';
+        req.pathname = urlp.pathname || '/';
+        
         // Raw body
         req.body = '';
         req.on('data', function(c){
         c = c+''; req.body += c; });
+        
+        // Cookies
+        req.cookie =
+        qry(req.headers.cookie, ';');
+        
+        // JSON body
+        req.json = {};
+        try { req.json =
+        JSON.parse(req.body)
+        } catch(err){}
+        
+        // Form body
+        req.form = {};
+        try { req.form =
+        qry(req.body)
+        } catch(err){}
+        
+        // Text body
+        req.text = req.body;
+        
+        // Merged body
+        req.body = {};
+        for (var k in req.cookie) {
+            req.body[k] = req.cookie[k];
+        }
+        for (var k in req.json) {
+            req.body[k] = req.json[k];
+        }
+        for (var k in req.form) {
+            req.body[k] = req.form[k];
+        }
+        for (var k in req.query) {
+            req.body[k] = req.query[k];
+        }
         
         // Prepare res
         res.send = function(v) {
