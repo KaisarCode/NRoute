@@ -111,8 +111,8 @@ var mod = function(){
         
         // Prepare res
         res.send = function(v) {
-            typeof v == 'object'
-            v = JSON.stringify(v);
+            typeof v == 'object'?
+            v = JSON.stringify(v):0;
             res.end(v);
         }
         
