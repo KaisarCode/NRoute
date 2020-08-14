@@ -97,6 +97,18 @@ var mod = function(){
             req.body[k] = req.query[k];
         }
         
+        // Language
+        if (req.cookie['lang']) req.lang = req.cookie['lang'];
+        if (req.query['lang'])  req.lang = req.query['lang'];
+        if (!req.lang) {
+            try {
+            req.lang = req.headers['accept-language'];
+            req.lang = req.lang.split(';')[0];
+            req.lang = req.lang.split(',')[0];
+            req.lang = req.lang.split('-')[0];
+            } catch (err) { req.lang = 'en' }
+        } req.lang = req.lang.toLowerCase();
+        
         // Prepare res
         res.send = function(v) {
             typeof v == 'object'
