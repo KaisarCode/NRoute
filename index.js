@@ -54,6 +54,13 @@ var mod = function(){
         req.on('data', function(c){
         c = c+''; req.body += c; });
         
+        // Prepare res
+        res.send = function(v) {
+            typeof v == 'object'
+            v = JSON.stringify(v);
+            res.end(v);
+        }
+        
         // Call middlewares
         req.on('end', function(c){
             callMdw(req, res);
