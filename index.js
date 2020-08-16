@@ -58,6 +58,11 @@ var mod = function(){
         req.protocol = urlp.protocol || 'http';
         req.pathname = urlp.pathname || '/';
         
+        // Path to ID
+        req.pathid = req.url.split('?')[0].replace(/\//g, '-');
+        req.pathid = req.pathid.replace(/^-/,'');
+        req.pathid = req.pathid || 'home';
+        
         // Raw body
         req.body = '';
         req.on('data', function(c){
