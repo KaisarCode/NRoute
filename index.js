@@ -56,7 +56,7 @@ var mod = function(){
         url.parse(req.url);
         req.query = qry(urlp.query);
         req.protocol = urlp.protocol || 'http';
-        req.pathname = urlp.pathname || '/';
+        req.path = urlp.pathname || '/';
         
         // Path to ID
         req.pathid = req.url;
