@@ -92,8 +92,9 @@ var mod = function(){
             
             // Form body
             req.form = {};
-            try { req.form =
-            qry(req.body)
+            try {
+            if (!Object.keys(req.json).length)
+            req.form = qry(req.body);
             } catch(err){}
             
             // Text body
