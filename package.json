@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/KaisarCode/NRoute",
   "dependencies": {
+    "kc-fwalk": "^1.0.5",
+    "kc-headers": "^1.0.6",
     "kc-qstr": "^1.0.3"
   }
 }

@@ -9,6 +9,8 @@ return typeof v
 !== 'undefined'; }
 var url = require('url');
 var qry = require('kc-qstr');
+var fwk = require('kc-fwalk');
+var hdr = require('kc-headers');
 
 var mod = function(){
     var app = this;
@@ -33,6 +35,22 @@ var mod = function(){
     var mdw = [];
     app.use = function(cb) {
         mdw.push(cb);
+    }
+    
+    // Public files
+    app.pub = function(dir){
+        var fls = fwk(dir);
+        app.use(function(req, res, next){
+            var p = req.path;
+            var f  = dir+p;
+            if (fls.indexOf(f) > -1) {
+                var r = fs.createReadStream(f);
+                r.on('open', function() {
+                    hdr.ctype(res, f);
+                    r.pipe(res);
+                });
+            } else { next(); }
+        }); return app;
     }
     
     // Call middleware stack
