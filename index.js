@@ -90,9 +90,12 @@ var mod = function(){
         
         // Prepare res
         res.send = function(v) {
-            typeof v == 'object'?
-            v = JSON.stringify(v):0;
-            res.end(v);
+            if (typeof v == 'object') {
+                v = JSON.stringify(v);
+                hdr.ctype(res, 'json');
+            } else {
+                hdr.ctype(res, 'html');
+            } res.end(v);
         }
         
         // Call middlewares
