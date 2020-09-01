@@ -1,6 +1,6 @@
 {
   "name": "nroute",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "Non-bloated Nodejs http server and request handler",
   "main": "index.js",
   "repository": {
