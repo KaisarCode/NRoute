@@ -83,6 +83,10 @@ var mod = function(){
         req.pathid = req.pathid.replace(/^-/,'');
         req.pathid = req.pathid || 'home';
         
+        // Locals
+        req.locals = {};
+        res.locals = {};
+        
         // Raw body
         req.body = '';
         req.on('data', function(c){
