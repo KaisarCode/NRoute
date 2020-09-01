@@ -84,6 +84,7 @@ var mod = function(){
         req.pathid = req.pathid || 'home';
         
         // Locals
+        req.ctx = {};
         req.locals = {};
         res.locals = {};
         
