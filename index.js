@@ -142,8 +142,8 @@ var mod = function(){
             }
             
             // Language
-            if (req.cookie['lang']) req.lang = req.cookie['lang'];
-            if (req.query['lang'])  req.lang = req.query['lang'];
+            if (req.body.lang)
+            req.lang = req.body.lang;
             if (!req.lang) {
                 try {
                 req.lang = req.headers['accept-language'];
