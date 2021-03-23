@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/KaisarCode/JSUtils.git"
+    "url": "https://github.com/kaisarsnippets/JSUtils.git"
   },
   "keywords": [
     "server",
@@ -17,9 +17,9 @@
   "author": "KaisarCode",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/KaisarCode/NRoute/issues"
+    "url": "https://github.com/kaisarsnippets/NRoute/issues"
   },
-  "homepage": "https://github.com/KaisarCode/NRoute",
+  "homepage": "https://github.com/kaisarsnippets/NRoute",
   "dependencies": {
     "kc-fwalk": "^1.0.5",
     "kc-headers": "^1.0.7",
